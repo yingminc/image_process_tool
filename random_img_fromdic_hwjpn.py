@@ -33,15 +33,16 @@ charlist = list(set(charalist))
 
 charlist = [g.decode('utf-8') for g in charlist]
 
+#make a dir for counting the uses of chars
 charcolist={}
 for g in charlist:
     charcolist[g] = 0
 
 
-
+#load the background
 allback = [back for back in os.listdir(background_path)if 'png' in back]
 
-#random chose target word
+#make a list of dictionary vocabuary
 with open(file_of_dict, 'rb',) as words:
     words = csv.reader(words, delimiter=',', quotechar='|',encoding='utf-8')
     wordslist=list(words)
@@ -65,12 +66,11 @@ def random_img(duck):
 
     #list char for target words
     dictwords = []
-
     for i, c in enumerate(u):
         dictwords.append(c)
 
 
-
+    #return if the char is not in dataset
     for i in dictwords:
         if i not in charlist:
             return
@@ -145,7 +145,7 @@ def random_img(duck):
     if ims3 == []:
         return
 
-    #creat a new image as a canvas
+    #get size info of imgs
     widths, heights = zip(*(i.size for i in ims))
     total_width = sum(widths)
     max_height = max(heights)
@@ -208,7 +208,7 @@ def random_img(duck):
     if rate>1:
         rate=1
 
-    #avoid extrame error
+    #avoid extrame size error
     if rate*min(heights + heights2 + heights3)<1 :
         return
     elif rate*min(total_width , total_width2 , total_width3) <1:
@@ -232,14 +232,15 @@ def random_img(duck):
     x_p3 = np.random.randint(0,500-((total_width3+15*size2)*rate))
     y_p3 = y_p
 
+
+    #combine image
     txt = []
     h1 = []
     x_offset = 0
 
-
-    #combine image
     for ind, i in enumerate(ims):
 
+        #affine
         orin_w, orin_h = i.size
         new_w = orin_w + int(abs(orin_h*m))
         new_h = orin_h + int(abs(orin_w*n))
@@ -248,7 +249,7 @@ def random_img(duck):
             -n, 1, int(orin_w*n)if n<0 else 0), Image.BILINEAR)
 
 
-
+        #rotate
         i = i.rotate(ang,expand=True)
         #set random gap
         y_gap = np.random.randint(0,5)
@@ -274,7 +275,7 @@ def random_img(duck):
         else:
             y_b = 500-int((i.size[1]*rate)+y_gap+(max_height2*rate)+(max_height3*rate)+10)
 
-
+        #resize
         i=i.resize((int(w*rate),int(h*rate)),Image.BILINEAR)
 
         w, h = i.size
@@ -288,19 +289,20 @@ def random_img(duck):
         i_w = str(w)
         i_h = str(h)
 
-        #center of image
+        #creat txt info
         txt.append((dictwords[ind]+" "+i_x+" "+i_y+" "+i_w+" "+i_h))
 
+        #count the use of char
         charcolist[dictwords[ind]] +=1
 
 
 
 
-
+    #2
     txt2 = []
     x_offset2 = 0
 
-    #2
+
     for ind, i in enumerate(ims2):
 
         orin_w, orin_h = i.size
@@ -415,7 +417,7 @@ def random_img(duck):
         charcolist[dictwords3[ind]] +=1
 
 
-
+    #make txt file
     txt = txt + txt2 +txt3
     txt = "\n".join(i for i in txt)
 
@@ -423,12 +425,14 @@ def random_img(duck):
         name = '0'*(7-len(str(duck))) + str(duck)
     else:
         name = str(duck)
-
     with codecs.open(os.path.join(path_for_save_resault,"%s.txt" %(name)), "w" ,'utf-8') as output:
         output.write(txt)
+
+    #save combined img
     canvas.save(os.path.join(path_for_save_resault,"%s.png" %(name)))
 
 
+#define the shuffle
 def shuffle_words_img(goose):
     shuffle(words)
     for duck in range(0,int(len(words)/3)):
@@ -438,7 +442,7 @@ def shuffle_words_img(goose):
 
 
 
-
+#real loop
 start = time.time()
 
 for goose in range(0,1):
@@ -448,6 +452,7 @@ end = time.time()
 
 print (end - start)
 
+#save the dictionary for counting
 charcolisttxt = u""
 for (i,j) in charcolist.items():
     charcolisttxt = charcolisttxt + i + str(j) + u"\n"
