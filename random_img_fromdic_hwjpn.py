@@ -19,12 +19,11 @@ import time
 import codecs
 from random import shuffle
 
+#TODO: change from absolute path to relative path
 txtimg_folder="/home/ubuntu/Documents/JPN_test_r"
 file_of_dict='/home/ubuntu/Documents/ipadict/merge2.csv'
 path_for_save_resault="/home/ubuntu/Documents/JPN_test_r_img"
 background_path = '/home/ubuntu/Documents/back'
-
-#
 
 #make a list of all char
 charalist = os.listdir(txtimg_folder)
