@@ -26,6 +26,8 @@ background_path = '/home/ubuntu/Documents/back'
 
 #
 
+
+htjhyr5tseyjhrt5jik
 #make a list of all char
 charalist = os.listdir(txtimg_folder)
 
