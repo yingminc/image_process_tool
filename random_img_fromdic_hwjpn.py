@@ -212,12 +212,13 @@ def random_img(duck):
         return
     elif rate*min(total_width , total_width2 , total_width3) <1:
         return
-    if (max(total_width , total_width2 , total_width3)+20*size)*rate >= 500:
+    if (max(total_width+20*size , total_width2+20*size2 , total_width3+20*size3))*rate >= 500:
         return
     elif (((max_height + max_height2 + max_height3)+30) *rate) >= 500:
         return
     elif 500- (((max_height + max_height2 + max_height3)+30) *rate)<((max_height3+10)*rate):
         return
+
 
 
 
@@ -228,7 +229,7 @@ def random_img(duck):
     x_p2 = np.random.randint(0,500-((total_width2+15*size2)*rate))
     y_p2 = y_p
 
-    x_p3 = np.random.randint(0,500-((total_width3+15*size2)*rate))
+    x_p3 = np.random.randint(0,500-((total_width3+15*size3)*rate))
     y_p3 = y_p
 
 
