@@ -14,7 +14,7 @@ import sys
 import time
 import unicodedata
 import unicodecsv as csv
-from builtins import bytes,chr
+#from builtins import bytes,chr
 import time
 import codecs
 from random import shuffle
