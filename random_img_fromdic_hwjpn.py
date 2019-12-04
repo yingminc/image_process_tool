@@ -14,22 +14,11 @@ import sys
 import time
 import unicodedata
 import unicodecsv as csv
-<<<<<<< HEAD
-#from builtins import bytes,chr
-=======
 #from builtins import bytes, chr
->>>>>>> debug
 import time
 import codecs
 from random import shuffle
 
-<<<<<<< HEAD
-#TODO: change from absolute path to relative path
-txtimg_folder="/home/yingminc/Documents/JPN_test_r"
-file_of_dict='/home/yingminc/Documents/ipadict/merge2.csv'
-path_for_save_resault="/home/yingminc/Documents/JPN_test_img"
-background_path = '/home/yingminc/Documents/back'
-=======
 # Print iterations progress
 def _printProgress (iteration, total, prefix = '', suffix = '', decimals = 1, barLength = 100):
     u"""
@@ -67,8 +56,6 @@ background_path = '../../data/generate_sentences/background_images/'
 
 # os.makedirs(path_for_save_result+"Images/")
 # os.makedirs(path_for_save_result+"Annotations/")
-
->>>>>>> debug
 
 #make a list of all char
 charalist = os.listdir(extracted_characters_folder)
@@ -261,11 +248,7 @@ def random_img(duck):
         return
     elif rate * min(total_width, total_width2, total_width3) < 1:
         return
-<<<<<<< HEAD
     if (max(total_width+20*size , total_width2+20*size2 , total_width3+20*size3))*rate >= 500:
-=======
-    if (max(total_width+20, total_width2+20, total_width3+20)) * rate >= 500:
->>>>>>> debug
         return
     elif (((max_height + max_height2 + max_height3) + 30) * rate) >= 500:
         return
@@ -273,12 +256,6 @@ def random_img(duck):
         (max_height3 + 10) * rate):
         return
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> debug
     #random position
     x_p = np.random.randint(0, 500 - ((total_width + 15) * rate))
     y_p = np.random.randint(0, 500 - ((
@@ -287,11 +264,7 @@ def random_img(duck):
     x_p2 = np.random.randint(0, 500 - ((total_width2 + 15) * rate))
     y_p2 = y_p
 
-<<<<<<< HEAD
     x_p3 = np.random.randint(0,500-((total_width3+15*size3)*rate))
-=======
-    x_p3 = np.random.randint(0, 500 - ((total_width3 + 15) * rate))
->>>>>>> debug
     y_p3 = y_p
 
     #combine image
